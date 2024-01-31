@@ -77,6 +77,8 @@ Your should have the executable ready to run with **./drogon-auth-sample**.
 
 ## Test
 
+### Login
+
 This example expose the login api for authentication. This return a session cookie for authorized endpoints. (Not implemented here). This example just compare the password strings just for demostration. This require BCrypt real comparation.
 
 -> Login URL: `localhost:8080/api/v1/auth/login`
@@ -86,8 +88,23 @@ This example expose the login api for authentication. This return a session cook
 {"username":"myusername","password":"samePasswordInDb"}
 ```
 
+### Signup
+
+The second endpoint exposed is for user creation. This return the json object of the new user created in case of a correct request. The body require names, username and passwords like this:
+
+-> Login URL: `localhost:8080/api/v1/auth/signup`
+-> Body(raw/json)
+
+```json
+{"first_name":"myname", "last_name":"mylastname","username":"myusername","password":"verystrongpassword:)"}
+```
+
+The controller validate if the username already exist and throw an exception in case of that. Also catch a bad json format.
+
+
 ## ToDo
 
 * Implemen BCrypt for a real login password validation.
-* Implement `signup` and `logout`
+* Implement `logout` and `change-password`
+* Fields validation in all endpoints
 
